@@ -1,0 +1,304 @@
+
+Interrupt_handling.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000014c  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_aranges 00000020  00000000  00000000  000001a0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_pubnames 0000002a  00000000  00000000  000001c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   00000213  00000000  00000000  000001ea  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 00000128  00000000  00000000  000003fd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   00000232  00000000  00000000  00000525  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000030  00000000  00000000  00000758  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    0000010a  00000000  00000000  00000788  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    000000fe  00000000  00000000  00000892  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 00000090  00000000  00000000  00000990  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 49 00 	jmp	0x92	; 0x92 <__vector_1>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ec e4       	ldi	r30, 0x4C	; 76
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	10 e0       	ldi	r17, 0x00	; 0
+  78:	a0 e6       	ldi	r26, 0x60	; 96
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a0 36       	cpi	r26, 0x60	; 96
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 87 00 	call	0x10e	; 0x10e <main>
+  8a:	0c 94 a4 00 	jmp	0x148	; 0x148 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__heap_end>
+
+00000092 <__vector_1>:
+#define F_CPU 16000000UL
+
+//Interrupt Service Routine
+
+ISR(INT0_vect)
+{
+  92:	1f 92       	push	r1
+  94:	0f 92       	push	r0
+  96:	0f b6       	in	r0, 0x3f	; 63
+  98:	0f 92       	push	r0
+  9a:	11 24       	eor	r1, r1
+  9c:	2f 93       	push	r18
+  9e:	3f 93       	push	r19
+  a0:	4f 93       	push	r20
+  a2:	5f 93       	push	r21
+  a4:	6f 93       	push	r22
+  a6:	8f 93       	push	r24
+  a8:	9f 93       	push	r25
+  aa:	ef 93       	push	r30
+  ac:	ff 93       	push	r31
+  ae:	88 e8       	ldi	r24, 0x88	; 136
+  b0:	93 e1       	ldi	r25, 0x13	; 19
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  b2:	29 e1       	ldi	r18, 0x19	; 25
+  b4:	30 e0       	ldi	r19, 0x00	; 0
+  b6:	f9 01       	movw	r30, r18
+  b8:	31 97       	sbiw	r30, 0x01	; 1
+  ba:	f1 f7       	brne	.-4      	; 0xb8 <__vector_1+0x26>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  bc:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  be:	d9 f7       	brne	.-10     	; 0xb6 <__vector_1+0x24>
+	unsigned char i,temp;
+	_delay_ms(500);
+	temp=PORTC; //Save current data value of PORTC
+  c0:	35 b3       	in	r19, 0x15	; 21
+  c2:	20 e0       	ldi	r18, 0x00	; 0
+  c4:	49 e1       	ldi	r20, 0x19	; 25
+  c6:	50 e0       	ldi	r21, 0x00	; 0
+	for(i=0;i<5;i++)
+	{
+		PORTC=0x00;
+		_delay_ms(500);
+		PORTC=0xff;
+  c8:	6f ef       	ldi	r22, 0xFF	; 255
+	unsigned char i,temp;
+	_delay_ms(500);
+	temp=PORTC; //Save current data value of PORTC
+	for(i=0;i<5;i++)
+	{
+		PORTC=0x00;
+  ca:	15 ba       	out	0x15, r1	; 21
+  cc:	88 e8       	ldi	r24, 0x88	; 136
+  ce:	93 e1       	ldi	r25, 0x13	; 19
+  d0:	fa 01       	movw	r30, r20
+  d2:	31 97       	sbiw	r30, 0x01	; 1
+  d4:	f1 f7       	brne	.-4      	; 0xd2 <__vector_1+0x40>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  d6:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  d8:	d9 f7       	brne	.-10     	; 0xd0 <__vector_1+0x3e>
+		_delay_ms(500);
+		PORTC=0xff;
+  da:	65 bb       	out	0x15, r22	; 21
+  dc:	88 e8       	ldi	r24, 0x88	; 136
+  de:	93 e1       	ldi	r25, 0x13	; 19
+  e0:	fa 01       	movw	r30, r20
+  e2:	31 97       	sbiw	r30, 0x01	; 1
+  e4:	f1 f7       	brne	.-4      	; 0xe2 <__vector_1+0x50>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  e6:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  e8:	d9 f7       	brne	.-10     	; 0xe0 <__vector_1+0x4e>
+ISR(INT0_vect)
+{
+	unsigned char i,temp;
+	_delay_ms(500);
+	temp=PORTC; //Save current data value of PORTC
+	for(i=0;i<5;i++)
+  ea:	2f 5f       	subi	r18, 0xFF	; 255
+  ec:	25 30       	cpi	r18, 0x05	; 5
+  ee:	69 f7       	brne	.-38     	; 0xca <__vector_1+0x38>
+		PORTC=0x00;
+		_delay_ms(500);
+		PORTC=0xff;
+		_delay_ms(500);
+	}
+	PORTC=temp; //Restore old value in PORTC (i.e. resume earlier task)
+  f0:	35 bb       	out	0x15, r19	; 21
+}
+  f2:	ff 91       	pop	r31
+  f4:	ef 91       	pop	r30
+  f6:	9f 91       	pop	r25
+  f8:	8f 91       	pop	r24
+  fa:	6f 91       	pop	r22
+  fc:	5f 91       	pop	r21
+  fe:	4f 91       	pop	r20
+ 100:	3f 91       	pop	r19
+ 102:	2f 91       	pop	r18
+ 104:	0f 90       	pop	r0
+ 106:	0f be       	out	0x3f, r0	; 63
+ 108:	0f 90       	pop	r0
+ 10a:	1f 90       	pop	r1
+ 10c:	18 95       	reti
+
+0000010e <main>:
+
+int main(void)
+{
+ 10e:	91 e0       	ldi	r25, 0x01	; 1
+ 110:	91 bb       	out	0x11, r25	; 17
+	DDRD=(1<<PD0);
+	PORTD=(0<<PD0);
+ 112:	12 ba       	out	0x12, r1	; 18
+	
+	DDRC=0xff;
+ 114:	8f ef       	ldi	r24, 0xFF	; 255
+ 116:	84 bb       	out	0x14, r24	; 20
+	PORTC=0x01;
+ 118:	95 bb       	out	0x15, r25	; 21
+
+	GICR=1<<INT0;
+ 11a:	80 e4       	ldi	r24, 0x40	; 64
+ 11c:	8b bf       	out	0x3b, r24	; 59
+	MCUCR=1<<ISC00|1<<ISC01;
+ 11e:	83 e0       	ldi	r24, 0x03	; 3
+ 120:	85 bf       	out	0x35, r24	; 53
+	
+	sei(); // Enable global interrupt
+ 122:	78 94       	sei
+	
+	while(1)
+	{
+		if(PORTC>=0x80)
+			PORTC = 1;
+ 124:	41 e0       	ldi	r20, 0x01	; 1
+ 126:	29 e1       	ldi	r18, 0x19	; 25
+ 128:	30 e0       	ldi	r19, 0x00	; 0
+	
+	sei(); // Enable global interrupt
+	
+	while(1)
+	{
+		if(PORTC>=0x80)
+ 12a:	af 9b       	sbis	0x15, 7	; 21
+ 12c:	02 c0       	rjmp	.+4      	; 0x132 <main+0x24>
+			PORTC = 1;
+ 12e:	45 bb       	out	0x15, r20	; 21
+ 130:	03 c0       	rjmp	.+6      	; 0x138 <main+0x2a>
+		else
+			PORTC = PORTC << 1;	// Shift to the left
+ 132:	85 b3       	in	r24, 0x15	; 21
+ 134:	88 0f       	add	r24, r24
+ 136:	85 bb       	out	0x15, r24	; 21
+ 138:	88 e8       	ldi	r24, 0x88	; 136
+ 13a:	93 e1       	ldi	r25, 0x13	; 19
+ 13c:	f9 01       	movw	r30, r18
+ 13e:	31 97       	sbiw	r30, 0x01	; 1
+ 140:	f1 f7       	brne	.-4      	; 0x13e <main+0x30>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 142:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 144:	91 f3       	breq	.-28     	; 0x12a <main+0x1c>
+ 146:	fa cf       	rjmp	.-12     	; 0x13c <main+0x2e>
+
+00000148 <_exit>:
+ 148:	f8 94       	cli
+
+0000014a <__stop_program>:
+ 14a:	ff cf       	rjmp	.-2      	; 0x14a <__stop_program>

@@ -1,0 +1,18 @@
+AVR Studio 4 users can copy this Header file to the below address location of your system.
+
+C:/WinAVR-2010\avr\include\avr
+
+If WinAVR-2010 folder is not there in the C drive then check your system drive(Where the Window OS is installed). If it is there then copy this header file in that drive at the below address location.
+
+System drive/WinAVR-2010\avr\include\avr.
+
+
+AVR Studio 5 users can copy this Header file to the below address location of your system.
+
+C:\Program Files (x86)\Atmel\AVR Studio 5.0\AVR Toolchain\avr\include\avr
+
+
+
+AVR Studio 6 users can copy this Header file to the below address location of your system.
+
+C:\Program Files (x86)\Atmel\Atmel Studio 6.0\extensions\Atmel\AVRGCC\3.4.1.95\AVRToolchain\avr\include\avr
