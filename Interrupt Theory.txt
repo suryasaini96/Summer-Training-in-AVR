@@ -1,0 +1,96 @@
+Interrupt Theory
+
+Types:-
+1. External - Reset,INT0,INT1,INT2
+2. Internal - Timer 0,1,2,ADC,USART, Comparator etc.
+
+Registers:-
+1. SREG - 1 bit
+2. MCUCR 
+3. MCUCSR
+4. GICR
+5. GIFR
+
+Interrupt Code:-
+Header File: #include <avr/interrupt.h>
+
+Functions:-
+sei() - to set
+cei()	- to reset
+	
+Some Code:-
+
+1. The main execution routine in ATMEGA16 (code executes when interrupt occurs) :-
+
+ISR (INTO_vect)  //Don't mention any return type for ISR
+{
+	PORTB=0xf0;
+	_delay_ms(1000);
+}
+
+Programming steps:-
+
+1. Clear the global interrupt pin using cli() function.
+2. Configure the specific registers for the interrupt enable MCUCR,MCUCSR,GICR.	
+3. Set the global interrupt bit in set registers.
+4. Write the specific interrupt service routine in defined format.
+
+Hence:-
+
+#include<avr/interrupt.h>
+
+ISR (INTO_vect) 
+{
+	PORTB=0xf0;
+	_delay_ms(1000);
+}
+
+void main()
+{
+	DDRB=0xff;
+	cli();
+	MCUCR=0x00;
+	GICR=0x40;
+	sei();
+	while(1)
+	{
+		PORTB=0x0f;
+		_delay_ms(1000); 
+		}
+}
+
+* The loop gets executed continuously but when any switch on the microcontoller is pressed then the ISR routine(interrupt) gets called.*
+
+USART
+
+Its a type of wireless communication done serially.
+
+Radio frequency(RF) of 434 MHz is unlicensed frequency.
+
+RX - HT12D ( D stands for decoding the data i.e. a decoder)
+TX - HT12E ( E stands for encoding the data i.e. an encoder) 
+
+A DIP switch is used on transmitter to select a channel for transmission (having specific channel id).
+The above ICs (modules) are ASIC ( Application Specific Integrated Circuit ).
+
+Transmission of a frame is called baud rate. A frame is a collection of all data bits and some extra bits.
+
+The rate of change of data bits is called data rate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+Assignments 28/6/17
+
+1. Animation
+2. LCD Scrolling
+3. LCD Matrix Scrolling
+
+Also study in ATmega 16 data sheet the following:-
+1. I/O
+2. Fuse/Lock bit
+
+Assignment 29/06/17
+
+1. Make a digital counter for a mall entry
+
+Assignment 30/6/17
+
+1. Motor movement
+2. Motor direction control
+3. Motor movement
+4. Line following robot & wall detecting robot programming through IR
+5. Visitor counter
+6. And study the following :- a) Switch b) Keypad (4*4) If possible then try logical operation of keypad.
+
+Assignment 4/7/17
+
+1. Control DC Motor using temperature sensor
+
+Assignment 10/7/17
+
+1. Control DC motor using wireless RF modules
